@@ -1,7 +1,7 @@
 services:
-  # Backend API Service
+  # Single Next.js Application (handles both frontend and API routes)
   - type: web
-    name: sportsstats-backend
+    name: sportsstats-app
     runtime: node
     plan: starter
     region: oregon
@@ -43,9 +43,9 @@ services:
       - key: JWT_SECRET
         value: sportsStatsAPI2024SecureJWTKeyForProductionUse32Plus
 
-      # API Configuration
+      # API Configuration (self-referencing since API routes are in same app)
       - key: NEXT_PUBLIC_API_URL
-        value: https://sportsstats-backend.onrender.com
+        value: https://sportsstats-app.onrender.com
 
       # Database (if needed later)
       - key: DATABASE_URL
@@ -53,68 +53,6 @@ services:
 
     # Health check endpoint
     healthCheckPath: /api/health
-
-    # Auto deploy from main branch
-    autoDeploy: true
-
-    # CORS headers for API
-    headers:
-      - path: /api/*
-        headers:
-          Access-Control-Allow-Origin: "*"
-          Access-Control-Allow-Methods: "GET, POST, PUT, DELETE, OPTIONS"
-          Access-Control-Allow-Headers: "Content-Type, Authorization, X-API-Key"
-
-  # Frontend Web Service
-  - type: web
-    name: sportsstats-frontend
-    runtime: node
-    plan: starter
-    region: oregon
-    rootDir: .
-    buildCommand: npm install && npm run build
-    startCommand: npm start
-    envVars:
-      # System
-      - key: NODE_ENV
-        value: production
-
-      # Firebase Configuration
-      - key: NEXT_PUBLIC_FIREBASE_API_KEY
-        value: AIzaSyAldoeFJwpEyiu_jistR3Aci9NtMq0QKis
-
-      - key: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-        value: sportstatisti-7e594.firebaseapp.com
-
-      - key: NEXT_PUBLIC_FIREBASE_PROJECT_ID
-        value: sportstatisti-7e594
-
-      - key: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-        value: sportstatisti-7e594.firebasestorage.app
-
-      - key: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-        value: "948736641097"
-
-      - key: NEXT_PUBLIC_FIREBASE_APP_ID
-        value: 1:948736641097:web:e382832db26708ce029798
-
-      # API Configuration - pointing to backend service
-      - key: NEXT_PUBLIC_API_URL
-        value: https://sportsstats-backend.onrender.com
-
-      # NOWPayments Configuration (frontend needs these for payment flow)
-      - key: NOWPAYMENTS_API_KEY
-        value: DQ1HPMB-6F94Y25-Q47KQMS-V90A5RQ
-
-      - key: NOWPAYMENTS_IPN_SECRET
-        value: HXDdgWaiedT5VJmxWLaoy/O7wl+YcEuv
-
-      # Security
-      - key: JWT_SECRET
-        value: sportsStatsAPI2024SecureJWTKeyForProductionUse32Plus
-
-    # Health check endpoint
-    healthCheckPath: /
 
     # Auto deploy from main branch
     autoDeploy: true
