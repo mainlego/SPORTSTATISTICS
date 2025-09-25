@@ -1,8 +1,46 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 
 export default function PricingPage() {
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+
+  const handleTrialRequest = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setMessage('')
+
+    try {
+      const response = await fetch('/api/trial-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        setMessage('✅ Trial request sent! Check your email for the trial link.')
+        setEmail('')
+
+        // In development, show the trial link directly
+        if (result.trialLink) {
+          setMessage(`✅ Trial link: ${result.trialLink}`)
+        }
+      } else {
+        setMessage(`❌ ${result.error || 'Failed to send request. Please try again.'}`)
+      }
+    } catch (error) {
+      setMessage('❌ Failed to send request. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
       {/* Navigation */}
@@ -96,6 +134,47 @@ export default function PricingPage() {
               Secure payment via cryptocurrency (NOWPayments)
               <br />
               Instant activation after payment confirmation
+            </p>
+          </div>
+
+          {/* Trial Request Form */}
+          <div className="mt-16 bg-white rounded-2xl shadow-lg p-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
+              Want to try before you buy?
+            </h2>
+            <p className="text-gray-600 text-center mb-6">
+              Request a free 7-day trial link sent directly to your email
+            </p>
+
+            <form onSubmit={handleTrialRequest} className="max-w-md mx-auto">
+              <div className="flex gap-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email address"
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                  required
+                  disabled={loading}
+                />
+                <button
+                  type="submit"
+                  disabled={loading || !email}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? 'Sending...' : 'Request Trial'}
+                </button>
+              </div>
+
+              {message && (
+                <div className="mt-4 p-3 bg-gray-50 rounded-lg text-center">
+                  <p className="text-gray-800 font-medium">{message}</p>
+                </div>
+              )}
+            </form>
+
+            <p className="text-xs text-gray-500 text-center mt-4">
+              Trial links are valid for 24 hours and include full API access
             </p>
           </div>
         </div>

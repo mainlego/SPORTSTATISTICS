@@ -228,13 +228,13 @@ export default function DocsPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                       <div className="p-4 border border-gray-200 rounded-lg">
                         <h3 className="font-semibold text-lg text-gray-900 mb-2">Base URL</h3>
-                        <code className="bg-gray-100 px-3 py-1 rounded text-sm">
+                        <code className="bg-gray-100 px-3 py-1 rounded text-sm text-gray-900">
                           https://api.sportsstats.com
                         </code>
                       </div>
                       <div className="p-4 border border-gray-200 rounded-lg">
                         <h3 className="font-semibold text-lg text-gray-900 mb-2">Response Format</h3>
-                        <code className="bg-gray-100 px-3 py-1 rounded text-sm">
+                        <code className="bg-gray-100 px-3 py-1 rounded text-sm text-gray-900">
                           JSON
                         </code>
                       </div>
@@ -265,7 +265,7 @@ export default function DocsPage() {
                     </p>
 
                     <div className="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6">
-                      <code>X-API-Key: your_api_key_here</code>
+                      <code className="text-gray-900">X-API-Key: your_api_key_here</code>
                     </div>
 
                     <p className="text-gray-600 mb-4">
@@ -273,7 +273,7 @@ export default function DocsPage() {
                     </p>
 
                     <div className="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6">
-                      <code>Authorization: Bearer your_api_key_here</code>
+                      <code className="text-gray-900">Authorization: Bearer your_api_key_here</code>
                     </div>
 
                     <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
@@ -296,7 +296,7 @@ export default function DocsPage() {
                           <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-semibold">
                             {endpoint.method}
                           </span>
-                          <code className="text-lg font-mono">{endpoint.endpoint}</code>
+                          <code className="text-lg font-mono text-gray-900">{endpoint.endpoint}</code>
                         </div>
 
                         <p className="text-gray-700 mb-4">{endpoint.description}</p>
