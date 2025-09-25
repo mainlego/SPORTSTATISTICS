@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:backend": "next build",
+    "start:backend": "next start",
+    "build:frontend": "next build",
+    "start:frontend": "next start",
+    "deploy:render": "echo \"Deploy via Render Dashboard with render.yaml blueprint\""
   },
   "keywords": [],
   "author": "",

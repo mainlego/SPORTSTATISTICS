@@ -84,16 +84,24 @@ Authorization: Bearer your_api_key
 
 ## 🚀 Развертывание
 
-### Render.com (Рекомендуется)
+### Render.com Blueprint (Рекомендуется)
 
-Простой и быстрый деплой:
+**2-сервисная архитектура:** Frontend + Backend
 
-1. **Создайте Firebase проект** для Authentication
-2. **Подключите GitHub** на render.com
-3. **Деплой из репозитория** `mainlego/SPORTSTATISTICS`
-4. **Настройте переменные** окружения
+1. **Frontend:** `sportsstats-frontend.onrender.com`
+2. **Backend API:** `sportsstats-backend.onrender.com`
 
-📖 **Подробная инструкция:** [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md)
+**1-Click Deploy:**
+- Все переменные окружения настроены в `render.yaml`
+- Автоматическое разделение на 2 сервиса
+- CORS настройки включены
+
+📖 **Blueprint Deploy:** [RENDER_BLUEPRINT_DEPLOY.md](RENDER_BLUEPRINT_DEPLOY.md)
+
+### Альтернативные способы:
+
+📖 **Единый сервис:** [RENDER_QUICK_DEPLOY.md](RENDER_QUICK_DEPLOY.md)
+📖 **Подробный мануал:** [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md)
 
 ### Firebase App Hosting (Альтернатива)
 
