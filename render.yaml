@@ -1,5 +1,5 @@
 services:
-  # Backend API Service
+  # Backend API Service (API only)
   - type: web
     name: sportsstats-backend
     runtime: node
@@ -47,7 +47,7 @@ services:
       - key: JWT_SECRET
         value: sportsStatsAPI2024SecureJWTKeyForProductionUse32Plus
 
-      # API Configuration (self-referencing)
+      # API Configuration (self-referencing for internal calls)
       - key: NEXT_PUBLIC_API_URL
         value: https://sportsstats-backend.onrender.com
 
@@ -60,14 +60,6 @@ services:
 
     # Auto deploy from main branch
     autoDeploy: true
-
-    # CORS headers for API
-    headers:
-      - path: /api/*
-        headers:
-          Access-Control-Allow-Origin: "*"
-          Access-Control-Allow-Methods: "GET, POST, PUT, DELETE, OPTIONS"
-          Access-Control-Allow-Headers: "Content-Type, Authorization, X-API-Key"
 
   # Frontend Web Service
   - type: web

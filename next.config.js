@@ -27,15 +27,7 @@ const nextConfig = {
   output: process.env.NODE_ENV === 'production' ? 'standalone' : undefined,
 
   // Service-specific configuration based on SERVICE_TYPE environment variable
-  ...(process.env.SERVICE_TYPE === 'backend' ? {
-    // Backend service: redirect all root paths to API
-    rewrites: async () => [
-      {
-        source: '/:path*',
-        destination: '/api/:path*',
-      },
-    ],
-  } : process.env.SERVICE_TYPE === 'frontend' ? {
+  ...(process.env.SERVICE_TYPE === 'frontend' ? {
     // Frontend service: proxy API calls to backend
     rewrites: async () => [
       {
