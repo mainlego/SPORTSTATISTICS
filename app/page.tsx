@@ -201,24 +201,24 @@ export default function HomePage() {
 
             <ul className="text-left max-w-sm mx-auto mb-8 space-y-3">
               <li className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
-                Unlimited API calls
+                <span className="text-green-500 mr-3 text-xl">✓</span>
+                <span className="text-gray-900 font-medium">Unlimited API calls</span>
               </li>
               <li className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
-                Access to all 10+ sports
+                <span className="text-green-500 mr-3 text-xl">✓</span>
+                <span className="text-gray-900 font-medium">Access to all 10+ sports</span>
               </li>
               <li className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
-                Real-time & historical data
+                <span className="text-green-500 mr-3 text-xl">✓</span>
+                <span className="text-gray-900 font-medium">Real-time & historical data</span>
               </li>
               <li className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
-                Premium support
+                <span className="text-green-500 mr-3 text-xl">✓</span>
+                <span className="text-gray-900 font-medium">Premium support</span>
               </li>
               <li className="flex items-center">
-                <span className="text-green-500 mr-3">✓</span>
-                99.9% uptime guarantee
+                <span className="text-green-500 mr-3 text-xl">✓</span>
+                <span className="text-gray-900 font-medium">99.9% uptime guarantee</span>
               </li>
             </ul>
 
@@ -252,7 +252,7 @@ export default function HomePage() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="px-6 py-3 rounded-lg text-gray-900 w-full sm:w-80"
+              className="px-6 py-3 rounded-lg text-gray-900 placeholder-gray-500 w-full sm:w-80"
             />
             <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
               Start Free Trial

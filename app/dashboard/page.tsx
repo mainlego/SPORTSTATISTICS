@@ -229,7 +229,7 @@ export default function DashboardPage() {
                     <div className="flex-1">
                       <p className="font-semibold">{apiKey.name}</p>
                       <div className="flex items-center gap-2 mt-2">
-                        <code className="bg-gray-100 px-3 py-1 rounded text-sm">
+                        <code className="bg-gray-100 px-3 py-1 rounded text-sm font-mono text-gray-900">
                           {apiKey.key.substring(0, 20)}...
                         </code>
                         <button
@@ -283,7 +283,7 @@ export default function DashboardPage() {
               placeholder="Key name (e.g., Production Server)"
               value={newKeyName}
               onChange={(e) => setNewKeyName(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4 text-gray-900 placeholder-gray-500"
             />
             <div className="flex gap-3">
               <button

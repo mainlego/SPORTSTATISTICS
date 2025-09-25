@@ -57,31 +57,31 @@ export default function PricingPage() {
             <ul className="text-left max-w-sm mx-auto mb-8 space-y-3">
               <li className="flex items-center">
                 <span className="text-green-500 mr-3 text-xl">✓</span>
-                <span className="text-gray-700">Unlimited API calls</span>
+                <span className="text-gray-900 font-medium">Unlimited API calls</span>
               </li>
               <li className="flex items-center">
                 <span className="text-green-500 mr-3 text-xl">✓</span>
-                <span className="text-gray-700">Access to all 10+ sports</span>
+                <span className="text-gray-900 font-medium">Access to all 10+ sports</span>
               </li>
               <li className="flex items-center">
                 <span className="text-green-500 mr-3 text-xl">✓</span>
-                <span className="text-gray-700">Real-time & historical data</span>
+                <span className="text-gray-900 font-medium">Real-time & historical data</span>
               </li>
               <li className="flex items-center">
                 <span className="text-green-500 mr-3 text-xl">✓</span>
-                <span className="text-gray-700">Premium support</span>
+                <span className="text-gray-900 font-medium">Premium support</span>
               </li>
               <li className="flex items-center">
                 <span className="text-green-500 mr-3 text-xl">✓</span>
-                <span className="text-gray-700">99.9% uptime guarantee</span>
+                <span className="text-gray-900 font-medium">99.9% uptime guarantee</span>
               </li>
               <li className="flex items-center">
                 <span className="text-green-500 mr-3 text-xl">✓</span>
-                <span className="text-gray-700">Webhook support</span>
+                <span className="text-gray-900 font-medium">Webhook support</span>
               </li>
               <li className="flex items-center">
                 <span className="text-green-500 mr-3 text-xl">✓</span>
-                <span className="text-gray-700">Custom rate limits</span>
+                <span className="text-gray-900 font-medium">Custom rate limits</span>
               </li>
             </ul>
 
