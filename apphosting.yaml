@@ -1,0 +1,25 @@
+# Firebase App Hosting configuration
+runConfig:
+  runtime: nodejs20
+
+# Environment variables for production
+env:
+  # NOWPayments configuration
+  - variable: NOWPAYMENTS_API_KEY
+    value: DQ1HPMB-6F94Y25-Q47KQMS-V90A5RQ
+
+  - variable: NOWPAYMENTS_IPN_SECRET
+    secret: nowpayments_ipn_secret
+
+  # JWT Secret
+  - variable: JWT_SECRET
+    secret: jwt_secret_key
+
+  # Firebase configuration will be automatically injected
+  - variable: NEXT_PUBLIC_API_URL
+    value: https://your-app-domain.web.app
+
+# Build configuration
+build:
+  installCommand: npm install
+  buildCommand: npm run build
