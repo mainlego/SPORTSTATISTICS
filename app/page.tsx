@@ -44,6 +44,45 @@ const features = [
 
 export default function HomePage() {
   const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const handleTrialRequest = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+
+    setLoading(true)
+    setMessage('')
+
+    try {
+      const response = await fetch('/api/trial-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        setMessage('✅ Trial request sent! Check your email for the trial link.')
+        setEmail('')
+
+        // In development, show the trial link directly
+        if (result.trialLink) {
+          setMessage(`✅ Trial link: ${result.trialLink}`)
+        }
+      } else {
+        setMessage(`❌ ${result.error || 'Failed to send request. Please try again.'}`)
+      }
+    } catch (error) {
+      setMessage('❌ Failed to send request. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen">
@@ -61,7 +100,9 @@ export default function HomePage() {
                 </span>
               </div>
             </div>
-            <div className="flex items-center space-x-6">
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-6">
               <Link href="/docs" className="text-gray-700 hover:text-blue-600 font-medium transition">
                 API Docs
               </Link>
@@ -78,7 +119,60 @@ export default function HomePage() {
                 Get Started
               </Link>
             </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-gray-700 hover:text-blue-600 focus:outline-none focus:text-blue-600 transition"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+                <Link
+                  href="/docs"
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium transition"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  API Docs
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium transition"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  href="/login"
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium transition"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/register"
+                  className="block mx-3 mt-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-2 rounded-full font-medium text-center hover:shadow-lg transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Get Started
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -246,18 +340,30 @@ export default function HomePage() {
             Join thousands of developers using our API
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <form onSubmit={handleTrialRequest} className="flex flex-col sm:flex-row gap-4 justify-center">
             <input
               type="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="px-6 py-3 rounded-lg text-gray-900 placeholder-gray-500 w-full sm:w-80"
+              required
+              disabled={loading}
             />
-            <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-              Start Free Trial
+            <button
+              type="submit"
+              disabled={loading || !email}
+              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? 'Sending...' : 'Start Free Trial'}
             </button>
-          </div>
+          </form>
+
+          {message && (
+            <div className="mt-6 max-w-md mx-auto p-4 bg-gray-800 rounded-lg border border-gray-700">
+              <p className="text-white text-center font-medium">{message}</p>
+            </div>
+          )}
         </div>
       </section>
 
