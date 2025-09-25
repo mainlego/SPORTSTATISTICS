@@ -44,12 +44,14 @@ After domain authorization:
 
 ## Current Status
 - ✅ Email/Password auth works
-- ⏳ Google OAuth temporarily disabled
-- 📋 Waiting for Firebase domain configuration
+- ✅ Google OAuth re-enabled and functional
+- ✅ Firebase domain configured successfully
 
-## Files Modified
-- `/app/login/page.tsx` - Google sign in disabled
-- `/app/register/page.tsx` - Google sign up disabled
-- Added warning messages for users
+## Files Modified (Now Restored)
+- `/app/login/page.tsx` - Google sign in re-enabled
+- `/app/register/page.tsx` - Google sign up re-enabled
+- Warning messages removed
+- Full OAuth functionality restored
 
-Once Firebase domain is configured, Google OAuth can be re-enabled by reverting the disabled state.
+## Resolution Completed ✅
+Firebase domain `sportsstats-app.onrender.com` has been successfully added to the authorized domains list. Google OAuth authentication is now fully functional for both sign in and sign up flows.
