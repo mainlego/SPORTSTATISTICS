@@ -1,0 +1,55 @@
+services:
+  - type: web
+    name: sportsstats-api
+    runtime: node
+    plan: starter
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      # Firebase Configuration
+      - key: NEXT_PUBLIC_FIREBASE_API_KEY
+        sync: false  # Set manually in Render dashboard
+
+      - key: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+        sync: false  # Set manually in Render dashboard
+
+      - key: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+        sync: false  # Set manually in Render dashboard
+
+      - key: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+        sync: false  # Set manually in Render dashboard
+
+      - key: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+        sync: false  # Set manually in Render dashboard
+
+      - key: NEXT_PUBLIC_FIREBASE_APP_ID
+        sync: false  # Set manually in Render dashboard
+
+      # NOWPayments Configuration
+      - key: NOWPAYMENTS_API_KEY
+        value: DQ1HPMB-6F94Y25-Q47KQMS-V90A5RQ
+
+      - key: NOWPAYMENTS_IPN_SECRET
+        sync: false  # Set manually in Render dashboard (get from NOWPayments)
+
+      # JWT Secret (generate random 32+ character string)
+      - key: JWT_SECRET
+        sync: false  # Set manually in Render dashboard
+
+      # API URL (will be provided by Render after deployment)
+      - key: NEXT_PUBLIC_API_URL
+        sync: false  # Set to your Render app URL like https://sportsstats-api.onrender.com
+
+    # Health check endpoint
+    healthCheckPath: /api/health
+
+    # Auto deploy from main branch
+    autoDeploy: true
+
+    # Domains (optional - add custom domain later)
+    # domains:
+    #   - sportsstats-api.com

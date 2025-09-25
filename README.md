@@ -82,27 +82,29 @@ Authorization: Bearer your_api_key
 - \`GET /api/v1/sports/{sport}/matches\` - Матчи по виду спорта
 - \`GET /api/v1/sports/{sport}/matches/{matchId}\` - Детальная информация о матче
 
-## Развертывание на Firebase
+## 🚀 Развертывание
 
-### 1. Установка Firebase CLI
+### Render.com (Рекомендуется)
+
+Простой и быстрый деплой:
+
+1. **Создайте Firebase проект** для Authentication
+2. **Подключите GitHub** на render.com
+3. **Деплой из репозитория** `mainlego/SPORTSTATISTICS`
+4. **Настройте переменные** окружения
+
+📖 **Подробная инструкция:** [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md)
+
+### Firebase App Hosting (Альтернатива)
 
 \`\`\`bash
 npm install -g firebase-tools
 firebase login
+firebase init apphosting
+firebase deploy --only apphosting
 \`\`\`
 
-### 2. Инициализация проекта
-
-\`\`\`bash
-firebase init
-\`\`\`
-
-### 3. Сборка и развертывание
-
-\`\`\`bash
-npm run build
-firebase deploy
-\`\`\`
+📖 **Подробная инструкция:** [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ## Настройка платежей NOWPayments
 

@@ -17,6 +17,14 @@ const nextConfig = {
       },
     ],
   },
+  // Оптимизация для Render
+  experimental: {
+    serverComponentsExternalPackages: ['firebase-admin']
+  },
+  // Отключаем статическую оптимизацию для API routes
+  trailingSlash: false,
+  // Конфигурация для продакшена
+  output: process.env.NODE_ENV === 'production' ? 'standalone' : undefined,
 }
 
 module.exports = nextConfig
