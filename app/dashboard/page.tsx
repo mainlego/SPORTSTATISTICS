@@ -173,19 +173,19 @@ export default function DashboardPage() {
           <h2 className="text-xl font-bold text-gray-900 mb-4">Subscription Status</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <p className="text-gray-600 text-sm">Status</p>
+              <p className="text-gray-800 text-sm">Status</p>
               <p className={`font-semibold ${isSubscriptionActive() ? 'text-green-600' : 'text-orange-600'}`}>
                 {userData?.subscription.status.toUpperCase()}
               </p>
             </div>
             <div>
-              <p className="text-gray-600 text-sm">Start Date</p>
+              <p className="text-gray-800 text-sm">Start Date</p>
               <p className="font-semibold text-gray-900">
                 {userData && new Date(userData.subscription.startDate).toLocaleDateString()}
               </p>
             </div>
             <div>
-              <p className="text-gray-600 text-sm">End Date</p>
+              <p className="text-gray-800 text-sm">End Date</p>
               <p className="font-semibold text-gray-900">
                 {userData && new Date(userData.subscription.endDate).toLocaleDateString()}
               </p>
@@ -221,7 +221,7 @@ export default function DashboardPage() {
           </div>
 
           {userData?.apiKeys.length === 0 ? (
-            <p className="text-gray-600">No API keys generated yet.</p>
+            <p className="text-gray-800">No API keys generated yet.</p>
           ) : (
             <div className="space-y-3">
               {userData?.apiKeys.map((apiKey) => (

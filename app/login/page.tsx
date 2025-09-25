@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
-import { auth, googleProvider } from '@/lib/firebase'
+import { auth, googleProvider, db } from '@/lib/firebase'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -33,7 +34,28 @@ export default function LoginPage() {
     setError('')
 
     try {
-      await signInWithPopup(auth, googleProvider)
+      const result = await signInWithPopup(auth, googleProvider)
+      const user = result.user
+
+      // Check if user profile exists
+      const userDocRef = doc(db, 'users', user.uid)
+      const userDoc = await getDoc(userDocRef)
+
+      // If user doesn't exist, create profile WITHOUT trial
+      if (!userDoc.exists()) {
+        await setDoc(userDocRef, {
+          email: user.email,
+          name: user.displayName,
+          createdAt: new Date().toISOString(),
+          subscription: {
+            status: 'inactive',
+            startDate: '',
+            endDate: '',
+          },
+          apiKeys: []
+        })
+      }
+
       router.push('/dashboard')
     } catch (error: any) {
       setError(error.message)

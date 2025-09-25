@@ -1,31 +1,58 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createUserWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth'
 import { auth, googleProvider, db } from '@/lib/firebase'
 import { doc, setDoc } from 'firebase/firestore'
 
-export default function RegisterPage() {
+function RegisterContent() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [isTrialMode, setIsTrialMode] = useState(false)
+
+  useEffect(() => {
+    const trial = searchParams.get('trial')
+    if (trial === 'true') {
+      setIsTrialMode(true)
+    }
+  }, [searchParams])
 
   const createUserProfile = async (userId: string, email: string, name: string) => {
+    // Always check trial parameter directly from URL to avoid race conditions
+    const currentTrialParam = searchParams.get('trial')
+    const shouldGiveTrial = currentTrialParam === 'true'
+
+    console.log('DEBUG: Creating user profile')
+    console.log('DEBUG: currentTrialParam =', currentTrialParam)
+    console.log('DEBUG: shouldGiveTrial =', shouldGiveTrial)
+
+    const subscriptionData = shouldGiveTrial
+      ? {
+          status: 'trial',
+          startDate: new Date().toISOString(),
+          endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days trial
+        }
+      : {
+          status: 'inactive',
+          startDate: '',
+          endDate: '',
+        }
+
+    console.log('DEBUG: subscriptionData =', subscriptionData)
+
     await setDoc(doc(db, 'users', userId), {
       email,
       name,
       createdAt: new Date().toISOString(),
-      subscription: {
-        status: 'trial',
-        startDate: new Date().toISOString(),
-        endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days trial
-      },
+      subscription: subscriptionData,
       apiKeys: []
     })
   }
@@ -70,14 +97,23 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 py-12">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            SportsStats API
-          </h1>
-          <p className="text-gray-600 mt-2">Create your account</p>
-        </div>
+    <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          SportsStats API
+        </h1>
+        <p className="text-gray-600 mt-2">
+          {isTrialMode ? 'Create your account with 7-day trial' : 'Create your account'}
+        </p>
+        {isTrialMode && (
+          <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+            <p className="text-green-800 text-sm font-semibold">🎉 7-Day Free Trial Included!</p>
+            <p className="text-green-700 text-xs mt-1">
+              Your account will include a 7-day free trial to test our API.
+            </p>
+          </div>
+        )}
+      </div>
 
         <form onSubmit={handleEmailRegister} className="space-y-4">
           <div>
@@ -198,7 +234,29 @@ export default function RegisterPage() {
         <p className="text-xs text-gray-500 text-center mt-4">
           By creating an account, you agree to our Terms of Service and Privacy Policy
         </p>
-      </div>
+    </div>
+  )
+}
+
+export default function RegisterPage() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 py-12">
+      <Suspense fallback={
+        <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded mb-6"></div>
+            <div className="space-y-4">
+              <div className="h-10 bg-gray-200 rounded"></div>
+              <div className="h-10 bg-gray-200 rounded"></div>
+              <div className="h-10 bg-gray-200 rounded"></div>
+              <div className="h-10 bg-gray-200 rounded"></div>
+            </div>
+          </div>
+        </div>
+      }>
+        <RegisterContent />
+      </Suspense>
     </div>
   )
 }
