@@ -139,7 +139,7 @@ export default function DocsPage() {
               SportsStats API
             </Link>
             <div className="flex items-center gap-4">
-              <Link href="/dashboard" className="text-gray-600 hover:text-blue-600 transition">
+              <Link href="/dashboard" className="text-gray-700 hover:text-blue-600 transition">
                 Dashboard
               </Link>
               <Link
@@ -219,7 +219,7 @@ export default function DocsPage() {
               <div className="p-8">
                 {activeSection === 'overview' && (
                   <div>
-                    <h1 className="text-3xl font-bold mb-6">API Documentation</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-6">API Documentation</h1>
                     <p className="text-lg text-gray-600 mb-6">
                       Welcome to the SportsStats API documentation. Our API provides comprehensive sports statistics
                       for 10+ major sports including real-time data, historical records, and detailed analytics.
@@ -227,23 +227,23 @@ export default function DocsPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                       <div className="p-4 border border-gray-200 rounded-lg">
-                        <h3 className="font-semibold text-lg mb-2">Base URL</h3>
+                        <h3 className="font-semibold text-lg text-gray-900 mb-2">Base URL</h3>
                         <code className="bg-gray-100 px-3 py-1 rounded text-sm">
                           https://api.sportsstats.com
                         </code>
                       </div>
                       <div className="p-4 border border-gray-200 rounded-lg">
-                        <h3 className="font-semibold text-lg mb-2">Response Format</h3>
+                        <h3 className="font-semibold text-lg text-gray-900 mb-2">Response Format</h3>
                         <code className="bg-gray-100 px-3 py-1 rounded text-sm">
                           JSON
                         </code>
                       </div>
                     </div>
 
-                    <h2 className="text-2xl font-bold mb-4">Supported Sports</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Supported Sports</h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                       {['Football', 'Basketball', 'Tennis', 'Baseball', 'Hockey', 'Cricket', 'Rugby', 'Golf', 'Boxing', 'MMA'].map((sport) => (
-                        <div key={sport} className="p-3 bg-gray-50 rounded-lg text-center">
+                        <div key={sport} className="p-3 bg-gray-50 rounded-lg text-center text-gray-900">
                           {sport}
                         </div>
                       ))}
@@ -253,13 +253,13 @@ export default function DocsPage() {
 
                 {activeSection === 'authentication' && (
                   <div>
-                    <h1 className="text-3xl font-bold mb-6">Authentication</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-6">Authentication</h1>
                     <p className="text-gray-600 mb-6">
                       All API requests require authentication using an API key. You can obtain your API key
                       by creating an account and purchasing a subscription.
                     </p>
 
-                    <h2 className="text-2xl font-bold mb-4">API Key Usage</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4">API Key Usage</h2>
                     <p className="text-gray-600 mb-4">
                       Include your API key in the request header:
                     </p>
@@ -288,7 +288,7 @@ export default function DocsPage() {
 
                 {activeSection === 'endpoints' && (
                   <div>
-                    <h1 className="text-3xl font-bold mb-6">API Endpoints</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-6">API Endpoints</h1>
 
                     {API_ENDPOINTS.map((endpoint, index) => (
                       <div key={index} className="mb-8 border border-gray-200 rounded-lg p-6">
@@ -299,26 +299,26 @@ export default function DocsPage() {
                           <code className="text-lg font-mono">{endpoint.endpoint}</code>
                         </div>
 
-                        <p className="text-gray-600 mb-4">{endpoint.description}</p>
+                        <p className="text-gray-700 mb-4">{endpoint.description}</p>
 
                         {endpoint.parameters.length > 0 && (
                           <div className="mb-4">
-                            <h3 className="font-semibold mb-2">Parameters</h3>
+                            <h3 className="font-semibold text-gray-900 mb-2">Parameters</h3>
                             <div className="overflow-x-auto">
                               <table className="w-full text-sm">
                                 <thead>
                                   <tr className="bg-gray-50">
-                                    <th className="text-left p-2 font-semibold">Name</th>
-                                    <th className="text-left p-2 font-semibold">Type</th>
-                                    <th className="text-left p-2 font-semibold">Required</th>
-                                    <th className="text-left p-2 font-semibold">Description</th>
+                                    <th className="text-left p-2 font-semibold text-gray-900">Name</th>
+                                    <th className="text-left p-2 font-semibold text-gray-900">Type</th>
+                                    <th className="text-left p-2 font-semibold text-gray-900">Required</th>
+                                    <th className="text-left p-2 font-semibold text-gray-900">Description</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   {endpoint.parameters.map((param, i) => (
                                     <tr key={i} className="border-t border-gray-200">
-                                      <td className="p-2 font-mono">{param.name}</td>
-                                      <td className="p-2">{param.type}</td>
+                                      <td className="p-2 font-mono text-gray-900">{param.name}</td>
+                                      <td className="p-2 text-gray-900">{param.type}</td>
                                       <td className="p-2">
                                         {param.required ? (
                                           <span className="text-red-600">Yes</span>
@@ -326,7 +326,7 @@ export default function DocsPage() {
                                           <span className="text-gray-500">No</span>
                                         )}
                                       </td>
-                                      <td className="p-2">{param.description}</td>
+                                      <td className="p-2 text-gray-700">{param.description}</td>
                                     </tr>
                                   ))}
                                 </tbody>
@@ -336,7 +336,7 @@ export default function DocsPage() {
                         )}
 
                         <div>
-                          <h3 className="font-semibold mb-2">Example Response</h3>
+                          <h3 className="font-semibold text-gray-900 mb-2">Example Response</h3>
                           <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
                             <code>{JSON.stringify(endpoint.example.response, null, 2)}</code>
                           </pre>
@@ -348,7 +348,7 @@ export default function DocsPage() {
 
                 {activeSection === 'examples' && (
                   <div>
-                    <h1 className="text-3xl font-bold mb-6">Code Examples</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-6">Code Examples</h1>
                     <p className="text-gray-600 mb-6">
                       Here are examples of how to make requests to our API in different programming languages.
                     </p>
@@ -379,7 +379,7 @@ export default function DocsPage() {
 
                 {activeSection === 'errors' && (
                   <div>
-                    <h1 className="text-3xl font-bold mb-6">Error Handling</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-6">Error Handling</h1>
                     <p className="text-gray-600 mb-6">
                       Our API uses standard HTTP status codes to indicate success or failure of requests.
                     </p>
@@ -388,7 +388,7 @@ export default function DocsPage() {
                       <div className="border border-gray-200 rounded-lg p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-semibold">200</span>
-                          <span className="font-semibold">OK</span>
+                          <span className="font-semibold text-gray-900">OK</span>
                         </div>
                         <p className="text-gray-600">Request successful</p>
                       </div>
@@ -396,7 +396,7 @@ export default function DocsPage() {
                       <div className="border border-gray-200 rounded-lg p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm font-semibold">401</span>
-                          <span className="font-semibold">Unauthorized</span>
+                          <span className="font-semibold text-gray-900">Unauthorized</span>
                         </div>
                         <p className="text-gray-600">Invalid or missing API key</p>
                       </div>
@@ -404,7 +404,7 @@ export default function DocsPage() {
                       <div className="border border-gray-200 rounded-lg p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm font-semibold">403</span>
-                          <span className="font-semibold">Forbidden</span>
+                          <span className="font-semibold text-gray-900">Forbidden</span>
                         </div>
                         <p className="text-gray-600">Subscription expired or insufficient permissions</p>
                       </div>
@@ -412,7 +412,7 @@ export default function DocsPage() {
                       <div className="border border-gray-200 rounded-lg p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm font-semibold">404</span>
-                          <span className="font-semibold">Not Found</span>
+                          <span className="font-semibold text-gray-900">Not Found</span>
                         </div>
                         <p className="text-gray-600">Resource not found</p>
                       </div>
@@ -420,14 +420,14 @@ export default function DocsPage() {
                       <div className="border border-gray-200 rounded-lg p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm font-semibold">500</span>
-                          <span className="font-semibold">Internal Server Error</span>
+                          <span className="font-semibold text-gray-900">Internal Server Error</span>
                         </div>
                         <p className="text-gray-600">Something went wrong on our end</p>
                       </div>
                     </div>
 
                     <div className="mt-8">
-                      <h2 className="text-2xl font-bold mb-4">Error Response Format</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-4">Error Response Format</h2>
                       <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
                         <code>{JSON.stringify({
                           "error": "Unauthorized",

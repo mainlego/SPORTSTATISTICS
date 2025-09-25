@@ -155,7 +155,7 @@ export default function DashboardPage() {
               SportsStats API
             </h1>
             <div className="flex items-center gap-4">
-              <span className="text-gray-600">{user?.email}</span>
+              <span className="text-gray-700">{user?.email}</span>
               <button
                 onClick={handleSignOut}
                 className="text-gray-700 hover:text-red-600 transition"
@@ -170,7 +170,7 @@ export default function DashboardPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Subscription Status */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-xl font-bold mb-4">Subscription Status</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Subscription Status</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <p className="text-gray-600 text-sm">Status</p>
@@ -180,13 +180,13 @@ export default function DashboardPage() {
             </div>
             <div>
               <p className="text-gray-600 text-sm">Start Date</p>
-              <p className="font-semibold">
+              <p className="font-semibold text-gray-900">
                 {userData && new Date(userData.subscription.startDate).toLocaleDateString()}
               </p>
             </div>
             <div>
               <p className="text-gray-600 text-sm">End Date</p>
-              <p className="font-semibold">
+              <p className="font-semibold text-gray-900">
                 {userData && new Date(userData.subscription.endDate).toLocaleDateString()}
               </p>
             </div>
@@ -210,7 +210,7 @@ export default function DashboardPage() {
         {/* API Keys */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">API Keys</h2>
+            <h2 className="text-xl font-bold text-gray-900">API Keys</h2>
             <button
               onClick={() => isSubscriptionActive() && setShowNewKeyModal(true)}
               disabled={!isSubscriptionActive()}
@@ -228,7 +228,7 @@ export default function DashboardPage() {
                 <div key={apiKey.key} className="border border-gray-200 rounded-lg p-4">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <p className="font-semibold">{apiKey.name}</p>
+                      <p className="font-semibold text-gray-900">{apiKey.name}</p>
                       <div className="flex items-center gap-2 mt-2">
                         <code className="bg-gray-100 px-3 py-1 rounded text-sm font-mono text-gray-900">
                           {apiKey.key.substring(0, 20)}...
@@ -260,15 +260,15 @@ export default function DashboardPage() {
         {/* Usage Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold mb-2">API Calls Today</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">API Calls Today</h3>
             <p className="text-3xl font-bold text-blue-600">0</p>
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold mb-2">Total API Calls</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Total API Calls</h3>
             <p className="text-3xl font-bold text-blue-600">0</p>
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold mb-2">Response Time</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Response Time</h3>
             <p className="text-3xl font-bold text-blue-600">0ms</p>
           </div>
         </div>
@@ -278,7 +278,7 @@ export default function DashboardPage() {
       {showNewKeyModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h3 className="text-xl font-bold mb-4">Generate New API Key</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Generate New API Key</h3>
             <input
               type="text"
               placeholder="Key name (e.g., Production Server)"
