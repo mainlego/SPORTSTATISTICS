@@ -265,7 +265,7 @@ export default function DocsPage() {
                     </p>
 
                     <div className="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6">
-                      <code className="text-gray-900">X-API-Key: your_api_key_here</code>
+                      <code>X-API-Key: your_api_key_here</code>
                     </div>
 
                     <p className="text-gray-600 mb-4">
@@ -273,7 +273,7 @@ export default function DocsPage() {
                     </p>
 
                     <div className="bg-gray-900 text-gray-100 p-4 rounded-lg mb-6">
-                      <code className="text-gray-900">Authorization: Bearer your_api_key_here</code>
+                      <code>Authorization: Bearer your_api_key_here</code>
                     </div>
 
                     <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
