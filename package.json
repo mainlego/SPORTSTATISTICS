@@ -21,7 +21,6 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "^6.16.2",
-    "@tailwindcss/postcss": "^4.1.13",
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.19",
     "@types/jsonwebtoken": "^9.0.10",
@@ -42,7 +41,7 @@
     "prisma": "^6.16.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "tailwindcss": "^4.1.13",
+    "tailwindcss": "^3.4.0",
     "typescript": "^5.9.2",
     "uuid": "^13.0.0"
   }
