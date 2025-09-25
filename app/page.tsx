@@ -48,27 +48,32 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 z-50">
+      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                SportsStats API
-              </span>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">S</span>
+                </div>
+                <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  SportsStats
+                </span>
+              </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <Link href="/docs" className="text-gray-700 hover:text-blue-600 transition">
-                Documentation
+            <div className="flex items-center space-x-6">
+              <Link href="/docs" className="text-gray-700 hover:text-blue-600 font-medium transition">
+                API Docs
               </Link>
-              <Link href="/pricing" className="text-gray-700 hover:text-blue-600 transition">
-                Pricing
+              <Link href="/dashboard" className="text-gray-700 hover:text-blue-600 font-medium transition">
+                Dashboard
               </Link>
-              <Link href="/login" className="text-gray-700 hover:text-blue-600 transition">
+              <Link href="/login" className="text-gray-700 hover:text-blue-600 font-medium transition">
                 Sign In
               </Link>
               <Link
                 href="/register"
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-2 rounded-full font-medium hover:shadow-lg transition-all transform hover:scale-105"
               >
                 Get Started
               </Link>
@@ -78,17 +83,20 @@ export default function HomePage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4">
+      <section className="relative pt-32 pb-20 px-4 overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50"></div>
-          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-1000"></div>
+          <div className="absolute top-20 left-20 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-100 to-purple-100 rounded-full opacity-30 blur-3xl"></div>
         </div>
 
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Premium Sports Statistics
-            <span className="block text-blue-600">API Service</span>
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Premium Sports
+            </span>
+            <span className="block">Statistics API</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Access comprehensive sports data for 10+ sports. Real-time scores,
@@ -98,15 +106,15 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Link
               href="/register"
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition transform hover:scale-105"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all transform hover:scale-105"
             >
-              Start Free Trial
+              Start Free Trial →
             </Link>
             <Link
               href="/docs"
-              className="bg-white text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-50 transition"
+              className="bg-white text-gray-800 px-8 py-4 rounded-full text-lg font-semibold shadow-md hover:shadow-xl transition-all border border-gray-200"
             >
-              View Documentation
+              📖 View Documentation
             </Link>
           </div>
 
@@ -124,24 +132,24 @@ export default function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-blue-600">10+</div>
-              <div className="text-gray-600 mt-2">Sports Covered</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center group">
+              <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform">10+</div>
+              <div className="text-gray-600 mt-2 font-medium">Sports Covered</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold text-blue-600">50K+</div>
-              <div className="text-gray-600 mt-2">Matches Daily</div>
+            <div className="text-center group">
+              <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform">50K+</div>
+              <div className="text-gray-600 mt-2 font-medium">Matches Daily</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold text-blue-600">99.9%</div>
-              <div className="text-gray-600 mt-2">Uptime SLA</div>
+            <div className="text-center group">
+              <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform">99.9%</div>
+              <div className="text-gray-600 mt-2 font-medium">Uptime SLA</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold text-blue-600">100ms</div>
-              <div className="text-gray-600 mt-2">Avg Response Time</div>
+            <div className="text-center group">
+              <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform">100ms</div>
+              <div className="text-gray-600 mt-2 font-medium">Avg Response</div>
             </div>
           </div>
         </div>
@@ -161,11 +169,11 @@ export default function HomePage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all group hover:-translate-y-1"
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">{feature.icon}</div>
+                <h3 className="text-xl font-bold mb-3 text-gray-800">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -180,12 +188,15 @@ export default function HomePage() {
             One plan, unlimited access to all sports data
           </p>
 
-          <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+          <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 relative overflow-hidden">
+            <div className="absolute top-0 right-0 bg-gradient-to-br from-blue-600 to-purple-600 text-white px-4 py-1 rounded-bl-xl text-sm font-bold">
+              BEST VALUE
+            </div>
             <div className="mb-8">
-              <div className="text-5xl font-bold text-blue-600 mb-2">
+              <div className="text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
                 $2,400 USDT
               </div>
-              <div className="text-gray-600">per year</div>
+              <div className="text-gray-600 text-lg">per year</div>
             </div>
 
             <ul className="text-left max-w-sm mx-auto mb-8 space-y-3">
@@ -251,48 +262,49 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 border-t border-gray-200">
+      <footer className="py-16 px-4 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div>
-              <h3 className="font-bold text-lg mb-4">Product</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li><Link href="/features">Features</Link></li>
-                <li><Link href="/pricing">Pricing</Link></li>
-                <li><Link href="/docs">Documentation</Link></li>
-                <li><Link href="/api-status">API Status</Link></li>
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">S</span>
+                </div>
+                <span className="text-xl font-bold">SportsStats</span>
+              </div>
+              <p className="text-gray-400">Premium sports statistics API for developers</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-lg mb-4">Quick Links</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="/docs" className="hover:text-white transition">Documentation</Link></li>
+                <li><Link href="/dashboard" className="hover:text-white transition">Dashboard</Link></li>
+                <li><Link href="/register" className="hover:text-white transition">Get Started</Link></li>
+                <li><Link href="/login" className="hover:text-white transition">Sign In</Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-lg mb-4">Sports</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>Football</li>
-                <li>Basketball</li>
-                <li>Tennis</li>
-                <li>More...</li>
+              <h3 className="font-bold text-lg mb-4">Sports Coverage</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>Football (NFL, Soccer)</li>
+                <li>Basketball (NBA)</li>
+                <li>Tennis (ATP, WTA)</li>
+                <li>And 7+ more sports</li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-lg mb-4">Company</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li><Link href="/about">About</Link></li>
-                <li><Link href="/blog">Blog</Link></li>
-                <li><Link href="/careers">Careers</Link></li>
-                <li><Link href="/contact">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold text-lg mb-4">Legal</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li><Link href="/privacy">Privacy Policy</Link></li>
-                <li><Link href="/terms">Terms of Service</Link></li>
-                <li><Link href="/sla">SLA</Link></li>
+              <h3 className="font-bold text-lg mb-4">Support</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>Email: support@sportsstats.api</li>
+                <li>Response time: &lt; 24 hours</li>
+                <li>Premium support included</li>
               </ul>
             </div>
           </div>
 
-          <div className="text-center text-gray-600 pt-8 border-t border-gray-200">
+          <div className="text-center text-gray-400 pt-8 border-t border-gray-800">
             <p>&copy; 2024 SportsStats API. All rights reserved.</p>
+            <p className="mt-2 text-sm">Secure payments via NOWPayments (Cryptocurrency)</p>
           </div>
         </div>
       </footer>
