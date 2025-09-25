@@ -123,8 +123,9 @@ export default function DashboardPage() {
 
       const result = await response.json()
 
-      if (result.success) {
-        window.open(result.payment.invoice_url, '_blank')
+      if (result.success && result.redirectUrl) {
+        // Redirect to NOWPayments invoice page
+        window.open(result.redirectUrl, '_blank')
       } else {
         alert('Failed to create payment. Please try again.')
       }

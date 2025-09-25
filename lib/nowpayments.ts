@@ -3,6 +3,39 @@ import crypto from 'crypto'
 
 const NOWPAYMENTS_API_URL = 'https://api.nowpayments.io/v1'
 
+interface InvoiceRequest {
+  price_amount: number
+  price_currency: string
+  pay_currency?: string
+  order_id: string
+  order_description: string
+  ipn_callback_url?: string
+  success_url?: string
+  cancel_url?: string
+  is_fixed_rate?: boolean
+  is_fee_paid_by_user?: boolean
+}
+
+interface InvoiceResponse {
+  id: string
+  token_id: string
+  order_id: string
+  order_description: string
+  price_amount: string
+  price_currency: string
+  pay_currency: string | null
+  ipn_callback_url: string
+  invoice_url: string
+  success_url: string
+  cancel_url: string
+  partially_paid_url: string
+  payout_currency: string
+  created_at: string
+  updated_at: string
+  is_fixed_rate: boolean
+  is_fee_paid_by_user: boolean
+}
+
 interface PaymentRequest {
   price_amount: number
   price_currency: string
@@ -10,8 +43,8 @@ interface PaymentRequest {
   order_id: string
   order_description: string
   ipn_callback_url?: string
-  success_url?: string
-  cancel_url?: string
+  is_fixed_rate?: boolean
+  is_fee_paid_by_user?: boolean
 }
 
 interface PaymentResponse {
@@ -45,6 +78,38 @@ export class NOWPaymentsService {
     this.ipnSecret = process.env.NOWPAYMENTS_IPN_SECRET || ''
   }
 
+  async createInvoice(userId: string, userEmail: string): Promise<InvoiceResponse> {
+    const invoiceData: InvoiceRequest = {
+      price_amount: 2400,
+      price_currency: 'usd',
+      order_id: `sub_${userId}_${Date.now()}`,
+      order_description: `SportsStats API Annual Subscription for ${userEmail}`,
+      ipn_callback_url: `${process.env.NEXT_PUBLIC_API_URL}/api/payment/webhook`,
+      success_url: `${process.env.NEXT_PUBLIC_API_URL}/dashboard?payment=success`,
+      cancel_url: `${process.env.NEXT_PUBLIC_API_URL}/dashboard?payment=cancelled`,
+      is_fixed_rate: false,
+      is_fee_paid_by_user: false
+    }
+
+    try {
+      const response = await axios.post(
+        `${NOWPAYMENTS_API_URL}/invoice`,
+        invoiceData,
+        {
+          headers: {
+            'x-api-key': this.apiKey,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+
+      return response.data
+    } catch (error) {
+      console.error('Error creating invoice:', error)
+      throw new Error('Failed to create invoice')
+    }
+  }
+
   async createPayment(userId: string, userEmail: string): Promise<PaymentResponse> {
     const paymentData: PaymentRequest = {
       price_amount: 2400,
@@ -53,8 +118,8 @@ export class NOWPaymentsService {
       order_id: `sub_${userId}_${Date.now()}`,
       order_description: `SportsStats API Annual Subscription for ${userEmail}`,
       ipn_callback_url: `${process.env.NEXT_PUBLIC_API_URL}/api/payment/webhook`,
-      success_url: `${process.env.NEXT_PUBLIC_API_URL}/dashboard?payment=success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_API_URL}/dashboard?payment=cancelled`
+      is_fixed_rate: false,
+      is_fee_paid_by_user: false
     }
 
     try {

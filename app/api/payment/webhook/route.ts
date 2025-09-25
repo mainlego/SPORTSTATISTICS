@@ -24,7 +24,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (body.payment_status === 'finished') {
+    // Handle both payment and invoice webhooks
+    const status = body.payment_status || body.invoice_status
+    const paymentId = body.payment_id || body.invoice_id || body.id
+
+    if (status === 'finished' || status === 'confirmed') {
       const orderId = body.order_id
       const userId = orderId.split('_')[1]
 
@@ -37,15 +41,16 @@ export async function POST(request: NextRequest) {
           'subscription.status': 'active',
           'subscription.startDate': new Date().toISOString(),
           'subscription.endDate': endDate.toISOString(),
-          'subscription.paymentId': body.payment_id,
-          'subscription.lastPaymentDate': new Date().toISOString()
+          'subscription.paymentId': paymentId,
+          'subscription.lastPaymentDate': new Date().toISOString(),
+          'subscription.type': body.payment_id ? 'payment' : 'invoice'
         })
 
-        console.log(`Subscription activated for user: ${userId}`)
+        console.log(`Subscription activated for user: ${userId} via ${body.payment_id ? 'payment' : 'invoice'}`)
       }
     }
 
-    if (body.payment_status === 'failed' || body.payment_status === 'expired') {
+    if (status === 'failed' || status === 'expired' || status === 'cancelled') {
       const orderId = body.order_id
       const userId = orderId.split('_')[1]
 
@@ -54,10 +59,10 @@ export async function POST(request: NextRequest) {
 
         await updateDoc(userDocRef, {
           'subscription.lastPaymentAttempt': new Date().toISOString(),
-          'subscription.lastPaymentStatus': body.payment_status
+          'subscription.lastPaymentStatus': status
         })
 
-        console.log(`Payment ${body.payment_status} for user: ${userId}`)
+        console.log(`Payment ${status} for user: ${userId}`)
       }
     }
 

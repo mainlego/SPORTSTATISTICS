@@ -26,11 +26,13 @@ export async function POST(request: NextRequest) {
     const userData = userDoc.data()
     const userEmail = userData.email
 
-    const payment = await nowPaymentsService.createPayment(userId, userEmail)
+    // Create invoice (payment link) for better user experience
+    const invoice = await nowPaymentsService.createInvoice(userId, userEmail)
 
     return NextResponse.json({
       success: true,
-      payment
+      invoice,
+      redirectUrl: invoice.invoice_url
     })
 
   } catch (error) {
