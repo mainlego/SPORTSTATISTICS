@@ -138,10 +138,10 @@ const MATCH_DATA = {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { sport: string } }
+  { params }: { params: Promise<{ sport: string }> }
 ) {
   try {
-    const { sport } = params
+    const { sport } = await params
     const { searchParams } = new URL(request.url)
 
     const limit = parseInt(searchParams.get('limit') || '20')
@@ -160,14 +160,14 @@ export async function GET(
       )
     }
 
-    let matches = MATCH_DATA[sport as keyof typeof MATCH_DATA]
+    let matches: any[] = MATCH_DATA[sport as keyof typeof MATCH_DATA]
 
     if (status) {
       matches = matches.filter(match => match.status === status)
     }
 
-    if (league && 'league' in matches[0]) {
-      matches = matches.filter(match => (match as any).league === league)
+    if (league && matches.length > 0 && 'league' in matches[0]) {
+      matches = matches.filter(match => match.league === league)
     }
 
     if (date) {

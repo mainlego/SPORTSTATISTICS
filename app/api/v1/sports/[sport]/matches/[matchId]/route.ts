@@ -200,10 +200,10 @@ const DETAILED_MATCH_DATA: { [key: string]: any } = {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { sport: string; matchId: string } }
+  { params }: { params: Promise<{ sport: string; matchId: string }> }
 ) {
   try {
-    const { sport, matchId } = params
+    const { sport, matchId } = await params
 
     const matchData = DETAILED_MATCH_DATA[matchId]
 
